@@ -4,6 +4,7 @@ import Toyota from "../images/cars-big/toyotacamry.jpg";
 import Bmw320 from "../images/cars-big/bmw320.jpg";
 import Benz from "../images/cars-big/benz.jpg";
 import Passat from "../images/cars-big/passatcc.jpg";
+import Porsche from "../images/cars-big/iris.jpg";
 
 export const CAR_DATA = [
   [
@@ -84,6 +85,20 @@ export const CAR_DATA = [
       model: "Passat CC",
       mark: "Volkswagen",
       year: "2008",
+      doors: "4/5",
+      air: "Yes",
+      transmission: "Automatic",
+      fuel: "Gasoline",
+    },
+  ],
+  [
+    {
+      name: "Porsche 911 GT3",
+      price: "40",
+      img: Porsche,
+      model: "Porsche 911",
+      mark: "Porsche",
+      year: "2019",
       doors: "4/5",
       air: "Yes",
       transmission: "Automatic",

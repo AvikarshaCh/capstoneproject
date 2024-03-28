@@ -9,12 +9,12 @@ import Person6 from "../images/team/6.png";
 
 function Team() {
   const teamPpl = [
-    { img: Person1, name: "Luke Miller", job: "Salesman" },
-    { img: Person2, name: "Michael Diaz", job: "Business Owner" },
-    { img: Person3, name: "Briana Ross", job: "Photographer" },
-    { img: Person4, name: "Lauren Rivera", job: "Car Detailist" },
-    { img: Person5, name: "Martin Rizz", job: "Mechanic" },
-    { img: Person6, name: "Caitlyn Hunt", job: "Menager" },
+    { img: Person1, name: "Udita Chakraborty", job: "Assistant Manager" },
+    { img: Person2, name: "Totan Hazra", job: "Manager" },
+    { img: Person3, name: "Shrey Rungta", job: "Director" },
+    { img: Person4, name: "Avikarsha Chowdhury", job: "Mechanic" },
+    { img: Person5, name: "Tanmay Sinha", job: "Mechanic" },
+    { img: Person6, name: "Our Team", job: "❤️ SATTU" },
   ];
   return (
     <>

@@ -6,6 +6,7 @@ import CarImg3 from "../images/cars-big/toyota-box.png";
 import CarImg4 from "../images/cars-big/bmw-box.png";
 import CarImg5 from "../images/cars-big/benz-box.png";
 import CarImg6 from "../images/cars-big/passat-box.png";
+import CarImg7 from "../images/cars-big/iris.jpg";
 import { Link } from "react-router-dom";
 
 function Models() {
@@ -259,6 +260,48 @@ function Models() {
                     </span>
                     <span>
                       <i className="fa-solid fa-car-side"></i> &nbsp; Manual
+                    </span>
+                    <span style={{ textAlign: "right" }}>
+                      Diesel &nbsp; <i className="fa-solid fa-car-side"></i>
+                    </span>
+                  </div>
+                  <div className="models-div__box__descr__name-price__btn">
+                    <Link onClick={() => window.scrollTo(0, 0)} to="/">
+                      Book Ride
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="models-div__box">
+              <div className="models-div__box__img">
+                <img src={CarImg7} alt="car_img" />
+                <div className="models-div__box__descr">
+                  <div className="models-div__box__descr__name-price">
+                    <div className="models-div__box__descr__name-price__name">
+                      <p>Porsche</p>
+                      <span>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                      </span>
+                    </div>
+                    <div className="models-div__box__descr__name-price__price">
+                      <h4>$35</h4>
+                      <p>per day</p>
+                    </div>
+                  </div>
+                  <div className="models-div__box__descr__name-price__details">
+                    <span>
+                      <i className="fa-solid fa-car-side"></i> &nbsp; CC
+                    </span>
+                    <span style={{ textAlign: "right" }}>
+                      2/3 &nbsp; <i className="fa-solid fa-car-side"></i>
+                    </span>
+                    <span>
+                      <i className="fa-solid fa-car-side"></i> &nbsp; Automatic
                     </span>
                     <span style={{ textAlign: "right" }}>
                       Diesel &nbsp; <i className="fa-solid fa-car-side"></i>
