@@ -1,7 +1,15 @@
 import Footer from "../components/Footer";
 import HeroPages from "../components/HeroPages";
+import { useNavigate } from "react-router-dom";
 
 function Contact() {
+  const nav= useNavigate();
+  const handleSubmit= (event)=>{
+    event.preventDefault();
+    
+    nav('/')
+  }
+
   return (
     <>
       <section className="contact-page">
@@ -28,21 +36,21 @@ function Contact() {
               </a>
             </div>
             <div className="contact-div__form">
-              <form>
-                <label>
+              <form onSubmit={(e)=>handleSubmit(e)}>
+                <label htmlFor="name">
                   Full Name <b>*</b>
                 </label>
-                <input type="text" placeholder='E.g: "Joe Shmoe"'></input>
+                <input name='name' id='name' type="text" placeholder='E.g: "Joe Shmoe"' required></input>
 
-                <label>
+                <label htmlFor="email">
                   Email <b>*</b>
                 </label>
-                <input type="email" placeholder="youremail@example.com"></input>
+                <input name='email' id='email' type="email" placeholder="youremail@example.com" required></input>
 
-                <label>
+                <label htmlFor="grievance">
                   Tell us about it <b>*</b>
                 </label>
-                <textarea placeholder="Write Here.."></textarea>
+                <textarea name='grievance' id='grievance' placeholder="Write Here.." required></textarea>
 
                 <button type="submit">
                   <i className="fa-solid fa-envelope-open-text"></i>&nbsp; Send

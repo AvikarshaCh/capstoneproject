@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../images/logo/logo.png";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
@@ -8,6 +9,13 @@ function Navbar() {
   const openNav = () => {
     setNav(!nav);
   };
+  const gotoLogin= ()=>{
+    if(window.confirm(`Are You Sure You Want To Logout?`)){
+        sessionStorage.clear()
+        nav('/')
+        window.location.reload();
+    }
+}
 
   return (
     <>
@@ -96,11 +104,18 @@ function Navbar() {
               </Link>
             </li>
           </ul>
+          <div>
+          {sessionStorage.user && <span> <strong><em>Signed in by: {sessionStorage.user}</em></strong> </span>}
+          </div>
           <div className="navbar__buttons">
-            <Link className="navbar__buttons__sign-in" to="/">
+            {sessionStorage.user && <Button className="navbar__buttons__sign-in" onClick={()=>gotoLogin()}>
+              Logout
+            </Button>}
+            {!sessionStorage.user && <Link className="navbar__buttons__sign-in" to="/login">
               Sign In
             </Link>
-            <Link className="navbar__buttons__register" to="/">
+            }
+            <Link className="navbar__buttons__register" to="/reg">
               Register
             </Link>
           </div>

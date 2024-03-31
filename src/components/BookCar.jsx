@@ -5,71 +5,52 @@ import CarToyota from "../images/cars-big/toyotacamry.jpg";
 import CarBmw from "../images/cars-big/bmw320.jpg";
 import CarMercedes from "../images/cars-big/benz.jpg";
 import CarPassat from "../images/cars-big/passatcc.jpg";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+ 
 function BookCar() {
-  const [modal, setModal] = useState(false); //  class - active-modal
-
   // booking car
+  
+  const [modal, setModal] = useState(false); //  class - active-modal
   const [carType, setCarType] = useState("");
-  const [pickUp, setPickUp] = useState("");
-  const [dropOff, setDropOff] = useState("");
-  const [pickTime, setPickTime] = useState("");
-  const [dropTime, setDropTime] = useState("");
+  
   const [carImg, setCarImg] = useState("");
-
   // modal infos
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [age, setAge] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [zipcode, setZipCode] = useState("");
+  
+  const [recordId, setRecordId] = useState(null);
+  const nav = useNavigate();
+  const [book, setbook] = useState({
+        carType:'',
+        pickupL:'',
+        pickupD:'',
+        dropOffL:'',
+        dropOffD:''
+    });
+    const [customer, setCustomer] = useState({
+      booking:'',
+      first_name:'',
+      last_name:'',
+      phone_number:'',
+      age:'',
+      email:'',
+      address:'',
+      city:'',
+      zipcode:''
+  });
+ 
+  
 
-  // taking value of modal inputs
-  const handleName = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleLastName = (e) => {
-    setLastName(e.target.value);
-  };
-
-  const handlePhone = (e) => {
-    setPhone(e.target.value);
-  };
-
-  const handleAge = (e) => {
-    setAge(e.target.value);
-  };
-
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleAddress = (e) => {
-    setAddress(e.target.value);
-  };
-
-  const handleCity = (e) => {
-    setCity(e.target.value);
-  };
-
-  const handleZip = (e) => {
-    setZipCode(e.target.value);
-  };
-
+ 
   // open modal when all inputs are fulfilled
   const openModal = (e) => {
     e.preventDefault();
     const errorMsg = document.querySelector(".error-message");
     if (
-      pickUp === "" ||
-      dropOff === "" ||
-      pickTime === "" ||
-      dropTime === "" ||
-      carType === ""
+      book.pickupL === "" ||
+      book.dropOffL === "" ||
+      book.pickupD === "" ||
+      book.dropOffL === "" ||
+      book.carType === ""
     ) {
       errorMsg.style.display = "flex";
     } else {
@@ -78,8 +59,16 @@ function BookCar() {
       modalDiv.scroll(0, 0);
       errorMsg.style.display = "none";
     }
-  };
+    
+    axios.post(`https://restapi-ewbo.onrender.com/booking`, book).then((res)=>{
+      window.alert(`New Booking Id Generated Successfully!`);
+      var newrecid= res.data.createdbook._id;
+      setRecordId(newrecid);
+      nav('/');
+  }).catch((error)=>{})
 
+  };
+  
   // disable page scroll when modal is displayed
   useEffect(() => {
     if (modal === true) {
@@ -88,37 +77,67 @@ function BookCar() {
       document.body.style.overflow = "auto";
     }
   }, [modal]);
-
+ 
   // confirm modal booking
   const confirmBooking = (e) => {
     e.preventDefault();
+    if(!customer.first_name.trim()){
+      document.getElementById('fnerr').innerHTML = "First Name field cannot be empty";
+            return false;
+    }
+    if(!customer.last_name.trim()){
+      document.getElementById('lnerr').innerHTML = "Last Name field cannot be empty";
+            return false;
+    }
+    if(!customer.phone_number.trim()){
+      document.getElementById('pnerr').innerHTML = "Phone Number field cannot be empty";
+            return false;
+    }
+    if(!customer.age.trim()){
+      document.getElementById('aerr').innerHTML = "Age field cannot be empty";
+            return false;
+    }
+    if(!customer.booking.trim()){
+      document.getElementById('berr').innerHTML = "Booking Id field cannot be empty";
+            return false;
+    }
+    if(!customer.email.trim()){
+      document.getElementById('mailerr').innerHTML = "Email field cannot be empty";
+            return false;
+    }
+    if(!customer.address.trim()){
+      document.getElementById('saerr').innerHTML = "Street Address field cannot be empty";
+            return false;
+    }
+    if(!customer.city.trim()){
+      document.getElementById('cerr').innerHTML = "City field cannot be empty";
+            return false;
+    }
+    if(!customer.zipcode.trim()){
+      document.getElementById('zerr').innerHTML = "Zipcode field cannot be empty";
+            return false;
+    }
     setModal(!modal);
     const doneMsg = document.querySelector(".booking-done");
     doneMsg.style.display = "flex";
+    axios.post(`https://restapi-ewbo.onrender.com/customer`, customer).then(()=>{
+      window.alert(`Customer Information Added Successfully!`)
+    }).catch((err)=>{    })
   };
-
-  // taking value of booking inputs
-  const handleCar = (e) => {
-    setCarType(e.target.value);
-    setCarImg(e.target.value);
-  };
-
-  const handlePick = (e) => {
-    setPickUp(e.target.value);
-  };
-
-  const handleDrop = (e) => {
-    setDropOff(e.target.value);
-  };
-
-  const handlePickTime = (e) => {
-    setPickTime(e.target.value);
-  };
-
-  const handleDropTime = (e) => {
-    setDropTime(e.target.value);
-  };
-
+ 
+  
+  const inputChangeHandler=(event)=>{
+    const{type, name, value} = event.target;
+    setbook({...book,[name]:value});
+}
+const handleCar = (e) => {
+  setCarType(e.target.value);
+  setCarImg(e.target.value);
+};
+const custipchangehandler=(e)=>{
+  const{type, name, value} = e.target;
+    setCustomer({...customer,[name]:value});
+}
   // based on value name show car img
   let imgUrl;
   switch (carImg) {
@@ -143,13 +162,13 @@ function BookCar() {
     default:
       imgUrl = "";
   }
-
+ 
   // hide message
   const hideMessage = () => {
     const doneMsg = document.querySelector(".booking-done");
     doneMsg.style.display = "none";
   };
-
+ 
   return (
     <>
       <section id="booking-section" className="book-section">
@@ -158,28 +177,28 @@ function BookCar() {
           onClick={openModal}
           className={`modal-overlay ${modal ? "active-modal" : ""}`}
         ></div>
-
+ 
         <div className="container">
           <div className="book-content">
             <div className="book-content__box">
               <h2>Book a car</h2>
-
+ 
               <p className="error-message">
                 All fields required! <i className="fa-solid fa-xmark"></i>
               </p>
-
+ 
               <p className="booking-done">
                 Check your email to confirm an order.{" "}
                 <i onClick={hideMessage} className="fa-solid fa-xmark"></i>
               </p>
-
+ 
               <form className="box-form">
                 <div className="box-form__car-type">
-                  <label>
+                  <label htmlFor="carType">
                     <i className="fa-solid fa-car"></i> &nbsp; Select Your Car
                     Type <b>*</b>
                   </label>
-                  <select value={carType} onChange={handleCar}>
+                  <select name='carType' id='carType' value={book.carType} onChange={(e)=>{inputChangeHandler(e);handleCar(e)}}>
                     <option>Select your car type</option>
                     <option value="Audi A1 S-Line">Audi A1 S-Line</option>
                     <option value="VW Golf 6">VW Golf 6</option>
@@ -191,63 +210,65 @@ function BookCar() {
                     <option value="VW Passat CC">VW Passat CC</option>
                   </select>
                 </div>
-
+ 
                 <div className="box-form__car-type">
-                  <label>
+                  <label htmlFor="pickupL">
                     <i className="fa-solid fa-location-dot"></i> &nbsp; Pick-up{" "}
                     <b>*</b>
                   </label>
-                  <select value={pickUp} onChange={handlePick}>
-                    <option>Select pick up location</option>
-                    <option>Delhi</option>
-                    <option>Kolkata</option>
-                    <option>Bengaluru</option>
-                    <option>Mumbai</option>
-                    <option>Goa</option>
+                  <select name='pickupL' id='pickupL' value={book.pickupL} onChange={(e)=>inputChangeHandler(e)}>
+                  <option value=''>Select pickup location</option>
+                    <option value='Delhi'>Delhi</option>
+                    <option value='Kolkata'>Kolkata</option>
+                    <option value='Bengaluru'>Bengaluru</option>
+                    <option value='Mumbai'>Mumbai</option>
+                    <option value='Goa'>Goa</option>
                   </select>
                 </div>
-
+ 
                 <div className="box-form__car-type">
-                  <label>
+                  <label htmlFor="dropOffL">
                     <i className="fa-solid fa-location-dot"></i> &nbsp; Drop-off{" "}
                     <b>*</b>
                   </label>
-                  <select value={dropOff} onChange={handleDrop}>
-                    <option>Select drop off location</option>
-                    <option>Delhi</option>
-                    <option>Kolkata</option>
-                    <option>Bengaluru</option>
-                    <option>Mumbai</option>
-                    <option>Goa</option>
+                  <select name='dropOffL' id='dropOffL' value={book.dropOffL} onChange={(e)=>inputChangeHandler(e)}>
+                    <option value=''>Select drop off location</option>
+                    <option value='Delhi'>Delhi</option>
+                    <option value='Kolkata'>Kolkata</option>
+                    <option value='Bengaluru'>Bengaluru</option>
+                    <option value='Mumbai'>Mumbai</option>
+                    <option value='Goa'>Goa</option>
                   </select>
                 </div>
-
+ 
                 <div className="box-form__car-time">
-                  <label htmlFor="picktime">
+                  <label htmlFor="pickupD">
                     <i className="fa-regular fa-calendar-days "></i> &nbsp;
                     Pick-up <b>*</b>
                   </label>
                   <input
-                    id="picktime"
-                    value={pickTime}
-                    onChange={handlePickTime}
+                  name='pickupD'
+                    id="pickupD"
+                    value={book.pickupD}
+                    onChange={(e)=>inputChangeHandler(e)}
                     type="date"
                   ></input>
                 </div>
-
+ 
                 <div className="box-form__car-time">
-                  <label htmlFor="droptime">
+                  <label htmlFor="dropOffD">
                     <i className="fa-regular fa-calendar-days "></i> &nbsp;
                     Drop-off <b>*</b>
                   </label>
                   <input
-                    id="droptime"
-                    value={dropTime}
-                    onChange={handleDropTime}
+                    name="dropOffD"
+                    id="dropOffD"
+                    value={book.dropOffD}
+                    onChange={(e)=>inputChangeHandler(e)}
                     type="date"
                   ></input>
                 </div>
-
+ 
                 <button onClick={openModal} type="submit">
                   Search
                 </button>
@@ -256,9 +277,9 @@ function BookCar() {
           </div>
         </div>
       </section>
-
+ 
       {/* modal ------------------------------------ */}
-
+ 
       <div className={`booking-modal ${modal ? "active-modal" : ""}`}>
         {/* title */}
         <div className="booking-modal__title">
@@ -286,52 +307,61 @@ function BookCar() {
                 <div>
                   <h6>Pick-Up Date & Time</h6>
                   <p>
-                    {pickTime} /{" "}
+                    {book.pickupD} /{" "}
                     <input type="time" className="input-time"></input>
                   </p>
                 </div>
               </span>
             </div>
-
+ 
             <div className="booking-modal__car-info__dates">
               <span>
                 <i className="fa-solid fa-location-dot"></i>
                 <div>
                   <h6>Drop-Off Date & Time</h6>
                   <p>
-                    {dropTime} /{" "}
+                    {book.dropOffD} /{" "}
                     <input type="time" className="input-time"></input>
                   </p>
                 </div>
               </span>
             </div>
-
+ 
             <div className="booking-modal__car-info__dates">
               <span>
                 <i className="fa-solid fa-calendar-days"></i>
                 <div>
                   <h6>Pick-Up Location</h6>
-                  <p>{pickUp}</p>
+                  <p>{book.pickupL}</p>
                 </div>
               </span>
             </div>
-
+ 
             <div className="booking-modal__car-info__dates">
               <span>
                 <i className="fa-solid fa-calendar-days"></i>
                 <div>
                   <h6>Drop-Off Location</h6>
-                  <p>{dropOff}</p>
+                  <p>{book.dropOffL}</p>
                 </div>
               </span>
             </div>
           </div>
           <div className="booking-modal__car-info__model">
             <h5>
-              <span>Car -</span> {carType}
+              <span>Car -</span> {book.carType}
             </h5>
             {imgUrl && <img src={imgUrl} alt="car_img" />}
-          </div>
+          </div><br/><br/>
+          <div className="booking-modal__car-info__dates">
+              <span>
+                <i className="fa-solid fa-calendar-days"></i>
+                <div>
+                  <h6>Booking Id</h6>
+                  <p>{recordId}</p>
+                </div>
+              </span>
+            </div>
         </div>
         {/* personal info */}
         <div className="booking-modal__person-info">
@@ -339,121 +369,153 @@ function BookCar() {
           <form className="info-form">
             <div className="info-form__2col">
               <span>
-                <label>
+                <label htmlFor="first_name">
                   First Name <b>*</b>
                 </label>
                 <input
-                  value={name}
-                  onChange={handleName}
+                name='first_name'
+                id='first_name'
+                  value={customer.first_name}
+                  onChange={(e)=>{custipchangehandler(e)}}
                   type="text"
                   placeholder="Enter your first name"
                 ></input>
-                <p className="error-modal">This field is required.</p>
+                <p className="fnerr"></p>
               </span>
-
+ 
               <span>
-                <label>
+                <label htmlFor="last_name">
                   Last Name <b>*</b>
                 </label>
                 <input
-                  value={lastName}
-                  onChange={handleLastName}
+                name='last_name'
+                id='last_name'
+                  value={customer.last_name}
+                  onChange={(e)=>{custipchangehandler(e)}}
                   type="text"
                   placeholder="Enter your last name"
                 ></input>
-                <p className="error-modal ">This field is required.</p>
+                <p className="lnerr"></p>
               </span>
-
+ 
               <span>
-                <label>
+                <label htmlFor="phone_number">
                   Phone Number <b>*</b>
                 </label>
                 <input
-                  value={phone}
-                  onChange={handlePhone}
+                name='phone_number'
+                id='phone_number'
+                  value={customer.phone_number}
+                  onChange={(e)=>{custipchangehandler(e)}}
                   type="tel"
                   placeholder="Enter your phone number"
                 ></input>
-                <p className="error-modal">This field is required.</p>
+                <p className="pnerr"></p>
               </span>
-
+ 
               <span>
-                <label>
+                <label htmlFor="age">
                   Age <b>*</b>
                 </label>
                 <input
-                  value={age}
-                  onChange={handleAge}
+                name='age'
+                id='age'
+                  value={customer.age}
+                  onChange={(e)=>{custipchangehandler(e)}}
                   type="number"
                   placeholder="18"
                 ></input>
-                <p className="error-modal ">This field is required.</p>
+                <p className="aerr"></p>
               </span>
             </div>
-
+ 
             <div className="info-form__1col">
               <span>
-                <label>
+                <label htmlFor="booking">
+                  Booking Id <b>*</b>
+                </label>
+                <input
+                name='booking'
+                id='booking'
+                  value={customer.booking}
+                  onChange={(e)=>{custipchangehandler(e)}}
+                  type="email"
+                  placeholder="Enter your booking id"
+                ></input>
+                <p className="berr"></p>
+              </span>
+            </div>
+            <div className="info-form__1col">
+              <span>
+                <label htmlFor="email">
                   Email <b>*</b>
                 </label>
                 <input
-                  value={email}
-                  onChange={handleEmail}
+                name='email'
+                id='email'
+                  value={customer.email}
+                  onChange={(e)=>{custipchangehandler(e)}}
                   type="email"
                   placeholder="Enter your email address"
                 ></input>
-                <p className="error-modal">This field is required.</p>
+                <p className="mailerr"></p>
               </span>
-
+ 
               <span>
-                <label>
+                <label htmlFor="address">
                   Address <b>*</b>
                 </label>
                 <input
-                  value={address}
-                  onChange={handleAddress}
+                name='address'
+                id='address'
+                  value={customer.address}
+                  onChange={(e)=>{custipchangehandler(e)}}
                   type="text"
                   placeholder="Enter your street address"
                 ></input>
-                <p className="error-modal ">This field is required.</p>
+                <p className="saerr"></p>
               </span>
             </div>
-
+ 
             <div className="info-form__2col">
               <span>
-                <label>
+                <label htmlFor="city">
                   City <b>*</b>
                 </label>
                 <input
-                  value={city}
-                  onChange={handleCity}
+                name='city'
+                id='city'
+                  value={customer.city}
+                  onChange={(e)=>{custipchangehandler(e)}}
                   type="text"
                   placeholder="Enter your city"
                 ></input>
-                <p className="error-modal">This field is required.</p>
+                <p className="cerr"></p>
               </span>
-
+ 
               <span>
-                <label>
+                <label htmlFor="zipcode">
                   Zip Code <b>*</b>
                 </label>
                 <input
-                  value={zipcode}
-                  onChange={handleZip}
+                name='zipcode'
+                id='zipcode'
+                  value={customer.zipcode}
+                  onChange={(e)=>{custipchangehandler(e)}}
                   type="text"
                   placeholder="Enter your zip code"
                 ></input>
-                <p className="error-modal ">This field is required.</p>
+                <p className="zerr"></p>
               </span>
             </div>
-
+ 
             <span className="info-form__checkbox">
               <input type="checkbox"></input>
               <p>Please send me latest news and updates</p>
             </span>
-
+ 
             <div className="reserve-button">
-              <button onClick={confirmBooking}>Reserve Now</button>
+              <button onClick={(e)=>confirmBooking(e)}>Reserve Now</button>
             </div>
           </form>
         </div>
@@ -461,5 +523,6 @@ function BookCar() {
     </>
   );
 }
-
+ 
 export default BookCar;
+ 

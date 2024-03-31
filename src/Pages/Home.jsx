@@ -13,7 +13,7 @@ function Home() {
   return (
     <>
       <Hero />
-      <BookCar />
+      {sessionStorage.user && <BookCar />}
       <PlanTrip />
       <PickCar />
       <Banner />

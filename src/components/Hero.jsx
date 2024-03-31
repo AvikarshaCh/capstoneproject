@@ -47,7 +47,7 @@ function Hero() {
                 flexible pick-up options and much more.
               </p>
               
-              <div className="hero-content__text__btns">
+              {sessionStorage.user && <div className="hero-content__text__btns">
                 <Link
                   onClick={bookBtn}
                   className="hero-content__text__btns__book-ride"
@@ -55,10 +55,14 @@ function Hero() {
                 >
                   Book Ride &nbsp; <i className="fa-solid fa-circle-check"></i>
                 </Link>
-                <Link className="hero-content__text__btns__learn-more" to="/">
+                {/* <Link className="hero-content__text__btns__learn-more" to="/">
                   Learn More &nbsp; <i className="fa-solid fa-angle-right"></i>
+                </Link> */}
+                <br />
+                <Link className="book" to="/book">
+                  Bookings &nbsp; <i className="fa-solid fa-circle-check"></i>
                 </Link>
-              </div>
+              </div>}
             </div>
 
             {/* img */}

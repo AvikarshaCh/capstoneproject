@@ -15,7 +15,145 @@ body {
   font-family: "Poppins", sans-serif;
   position: relative;
 }
- 
+
+.carTypediv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.carTypediv input{
+  outline: none;
+  color: #878585;
+  padding-right: 3rem;
+  border: 1px solid #ccd7e6;
+}
+.carTypediv label{
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+ .book{
+  
+  background-color: #010103;
+  padding: 1.8rem 3rem;
+  border-radius: 0.3rem;
+  border: 2px solid #010103;
+  transition: all 0.3s;
+ }
+
+.book_table{
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  /* font-weight: bold; */
+}
+#mailerr{
+  font-size:'10px';
+  color:#f90f26;
+  font-weight: bold;
+}
+#perr{
+  font-size:'10px';
+  color:#f2081f;
+  font-weight: bold;
+}
+#fnerr{
+  font-size:'10px';
+  color:#f2081f;
+  font-weight: bold;
+}
+#lnerr{
+  font-size:'10px';
+  color:#f2081f;
+  font-weight: bold;
+}
+#pnerr{
+  font-size:'10px';
+  color:#f2081f;
+  font-weight: bold;
+}
+#aerr{
+  font-size:'10px';
+  color:#f2081f;
+  font-weight: bold;
+}
+#saerr{
+  font-size:'10px';
+  color:#f2081f;
+  font-weight: bold;
+}
+#berr{
+  font-size:'10px';
+  color:#f2081f;
+  font-weight: bold;
+}
+#cerr{
+  font-size:'10px';
+  color:#f2081f;
+  font-weight: bold;
+}
+#zerr{
+  font-size:'10px';
+  color:#f2081f;
+  font-weight: bold;
+}
+.bookings{
+  border: 5px groove #4b84ff;
+  border-radius: 3px;
+  color: ghostwhite;
+  background-color: cornflowerblue;
+}
+.thead{
+  
+  font-weight: bolder;
+}
+.paginate{
+  cursor: pointer;
+  color: cornflowerblue;
+  list-style-type: none;
+  display: inline;
+  font-size: small;
+  font-weight: bold;
+}
+.btn-warning{
+  background-color: goldenrod;
+  color: cornsilk;
+  padding: 0.8rem 1.8rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 10px 15px 0 rgba(241, 207, 55, 0.35);
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+.btn-danger{
+  background-color: crimson;
+  color: cornsilk;
+  padding: 0.8rem 1.8rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 10px 15px 0 rgba(204, 104, 46, 0.35);
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+.btn-outline-warning{
+  /* background-color: cornflowerblue;
+  display: flex;
+  text-align: center;
+  padding:2px;
+  margin:auto;
+  box-sizing: border-box; */
+  color: cornsilk;
+  /* border: 2px groove darkgrey;
+  border-radius: 6px; */
+  background-color: #4b84ff;
+  padding: 1.8rem 3rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 10px 15px 0 rgba(46, 77, 204, 0.35);
+  transition: all 0.3s;
+  /* border: 2px solid #ff4d30; */
+  border: 2px solid #4b84ff;
+}
+
+
 .container {
   max-width: 133rem !important;
   margin: 0 auto !important;
@@ -124,16 +262,25 @@ body {
   }
 }
 .navbar__buttons__sign-in {
-  color: #010103;
+  background-color: black;
+  color: white;
+  padding: 1.5rem 3rem;
+  border-radius: 3px;
+  border: 0px;
+  font-weight: bold;
+  font-family:Arial, Helvetica, sans-serif;
+  box-shadow: 0 10px 15px 0 rgba(46, 77, 204, 0.35);
   cursor: pointer;
   transition: all 0.3s;
 }
 .navbar__buttons__sign-in:hover {
-  /* color: #ff4d30; */
-  color: #4b84ff;
+  
+  background-color: #4b84ff;
 }
 .navbar__buttons__register {
   /* background-color: #ff4d30; */
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight: bold;
   background-color: #4b84ff;
   color: white;
   padding: 1.5rem 3rem;
@@ -142,7 +289,7 @@ body {
   transition: all 0.3s;
 }
 .navbar__buttons__register:hover {
-  box-shadow: 0 10px 15px 0 rgba(46, 77, 204, 0.5);
+  box-shadow: 0 10px 15px 0 rgba(46, 77, 204, 0.8);
   /* background-color: #fa4226; */
   background-color: #4b84ff;
 }
@@ -449,6 +596,7 @@ body {
   padding: 1.2rem 1.3rem;
   outline: none;
 }
+
 .book-content__box .box-form__car-time {
   display: flex;
   flex-direction: column;
@@ -1691,6 +1839,7 @@ footer {
  
 .about-main {
   margin: 10rem auto;
+  text-align: center;
   display: flex;
   gap: 5rem;
   max-width: 90rem;
@@ -1728,6 +1877,14 @@ footer {
   color: #010103;
   display: flex;
   flex-direction: column;
+}
+
+.book-main__text {
+  font-size: 2.2rem;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #4b84ff;
 }
 .about-main__text h3 {
   font-size: 2.2rem;

@@ -26,8 +26,8 @@ function ChooseUs() {
                   give you the ultimate renting experience, so don't miss out on
                   your chance to save big.
                 </p>
-                <a href="#home">
-                  Find Details &nbsp;
+                <a href="/customer">
+                  Our Customers &nbsp;
                   <i className="fa-solid fa-angle-right"></i>
                 </a>
               </div>

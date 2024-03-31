@@ -57,6 +57,9 @@ function Footer() {
               <li>
                 <a href="#home">How we work</a>
               </li>
+              {sessionStorage.user==='admin@abc.com' && <li>
+                <a href="/userdb">Our User Data</a>
+              </li>}
             </ul>
 
             <ul className="footer-content__2">
