@@ -125,7 +125,7 @@ function BookCar() {
     else{
       document.getElementById('aerr').innerHTML = "";
     }
-    if(!customer.age.match>=18&&customer.age.match>60){
+    if(!customer.age>=18 && customer.age<60){
       document.getElementById('aerr').innerHTML = "Age must be between 18 and 60 years";
             return false;
     }
