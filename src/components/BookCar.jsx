@@ -27,7 +27,7 @@ function BookCar() {
         dropOffD:''
     });
     const [customer, setCustomer] = useState({
-      booking:'',
+      bookingId:'',
       first_name:'',
       last_name:'',
       phone_number:'',
@@ -129,7 +129,7 @@ function BookCar() {
       document.getElementById('aerr').innerHTML = "Age must be between 18 and 60 years";
             return false;
     }
-    if(!customer.booking.trim()){
+    if(!customer.bookingId.trim()){
       document.getElementById('berr').innerHTML = "Booking Id field cannot be empty";
             return false;
     }
@@ -478,15 +478,15 @@ const custipchangehandler=(e)=>{
  
             <div className="info-form__1col">
               <span>
-                <label htmlFor="booking">
+                <label htmlFor="bookingId">
                   Booking Id <b>*</b>
                 </label>
                 <input
-                name='booking'
-                id='booking'
-                  value={customer.booking}
+                name='bookingId'
+                id='bookingId'
+                  value={customer.bookingId}
                   onChange={(e)=>{custipchangehandler(e)}}
-                  type="email"
+                  type="text"
                   placeholder="Enter your booking id"
                 ></input>
                 <p id="berr"></p>

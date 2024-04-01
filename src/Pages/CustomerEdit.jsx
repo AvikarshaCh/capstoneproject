@@ -7,7 +7,7 @@ const CustomerEdit = () => {
     const {_id} = useParams();
     const nav = useNavigate();
     const [customer, setCustomer] = useState({
-        booking:'',
+        bookingId:'',
         first_name:'',
         last_name:'',
         phone_number:'',
@@ -49,7 +49,7 @@ const CustomerEdit = () => {
                 <div className='col-sm-3'></div>
                 <div className='col-sm-6'>
                     <form onSubmit={(e)=>editcust(e)} >
-                        <div className='info-form__1col'><label htmlFor='booking'>Enter Booking Id:</label><input type='text' name='booking' id='booking' value={customer.booking} onChange={(e)=>inputChangeHandler(e)} readOnly/></div><br/>
+                        <div className='info-form__1col'><label htmlFor='bookingId'>Enter Booking Id:</label><input type='text' name='bookingId' id='bookingId' value={customer.bookingId} onChange={(e)=>inputChangeHandler(e)} /></div><br/>
                         <div className='info-form__1col'><label htmlFor='first_name'>Enter First Name:</label><input type='text' name='first_name' id='first_name' value={customer.first_name} onChange={(e)=>inputChangeHandler(e)} /></div><br/>
                         <div className='info-form__1col'><label htmlFor='last_name'>Enter Last Name:</label><input type='text' name='last_name' id='last_name' value={customer.last_name} onChange={(e)=>inputChangeHandler(e)} /></div><br/>
                         <div className='info-form__1col'><label htmlFor='phone_number'>Enter Phone Number:</label><input type='text' name='phone_number' id='phone_number' value={customer.phone_number} onChange={(e)=>inputChangeHandler(e)} /></div><br/>
