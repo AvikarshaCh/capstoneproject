@@ -85,37 +85,84 @@ function BookCar() {
       document.getElementById('fnerr').innerHTML = "First Name field cannot be empty";
             return false;
     }
+    else{
+      document.getElementById('fnerr').innerHTML = "";
+
+    }
+    if(!customer.first_name.match("[a-zA-Z]{3,15}")){
+      document.getElementById('fnerr').innerHTML = "First Name must contain only character min-3 and max-15";
+      return false;
+  }
+  else{
+    document.getElementById('fnerr').innerHTML = "";
+
+  }
     if(!customer.last_name.trim()){
       document.getElementById('lnerr').innerHTML = "Last Name field cannot be empty";
             return false;
     }
+    else{
+      document.getElementById('lnerr').innerHTML = "";
+    }
+    if(!customer.last_name.match("[a-zA-Z]{3,15}")){
+      document.getElementById('lnerr').innerHTML = "Last Name must contain only character min-3 and max-15";
+      return false;
+  }
+  else{
+    document.getElementById('lnerr').innerHTML="";
+  }
     if(!customer.phone_number.trim()){
       document.getElementById('pnerr').innerHTML = "Phone Number field cannot be empty";
             return false;
     }
+    else{
+      document.getElementById('pnerr').innerHTML = "";
+    }
     if(!customer.age.trim()){
       document.getElementById('aerr').innerHTML = "Age field cannot be empty";
+            return false;
+    }
+    else{
+      document.getElementById('aerr').innerHTML = "";
+    }
+    if(!customer.age.match>=18&&customer.age.match>60){
+      document.getElementById('aerr').innerHTML = "Age must be between 18 and 60 years";
             return false;
     }
     if(!customer.booking.trim()){
       document.getElementById('berr').innerHTML = "Booking Id field cannot be empty";
             return false;
     }
+    else{
+      document.getElementById('berr').innerHTML = "";
+    }
     if(!customer.email.trim()){
       document.getElementById('mailerr').innerHTML = "Email field cannot be empty";
             return false;
+    }
+    else{
+      document.getElementById('mailerr').innerHTML = "";
     }
     if(!customer.address.trim()){
       document.getElementById('saerr').innerHTML = "Street Address field cannot be empty";
             return false;
     }
+    else{
+      document.getElementById('saerr').innerHTML = "";
+    }
     if(!customer.city.trim()){
       document.getElementById('cerr').innerHTML = "City field cannot be empty";
             return false;
     }
+    else{
+      document.getElementById('cerr').innerHTML = "";
+    }
     if(!customer.zipcode.trim()){
       document.getElementById('zerr').innerHTML = "Zipcode field cannot be empty";
             return false;
+    }
+    else{
+      document.getElementById('zerr').innerHTML = "";
     }
     setModal(!modal);
     const doneMsg = document.querySelector(".booking-done");
@@ -380,7 +427,7 @@ const custipchangehandler=(e)=>{
                   type="text"
                   placeholder="Enter your first name"
                 ></input>
-                <p className="fnerr"></p>
+                <p id="fnerr"></p>
               </span>
  
               <span>
@@ -395,7 +442,7 @@ const custipchangehandler=(e)=>{
                   type="text"
                   placeholder="Enter your last name"
                 ></input>
-                <p className="lnerr"></p>
+                <p id="lnerr"></p>
               </span>
  
               <span>
@@ -410,7 +457,7 @@ const custipchangehandler=(e)=>{
                   type="tel"
                   placeholder="Enter your phone number"
                 ></input>
-                <p className="pnerr"></p>
+                <p id="pnerr"></p>
               </span>
  
               <span>
@@ -425,7 +472,7 @@ const custipchangehandler=(e)=>{
                   type="number"
                   placeholder="18"
                 ></input>
-                <p className="aerr"></p>
+                <p id="aerr"></p>
               </span>
             </div>
  
@@ -442,7 +489,7 @@ const custipchangehandler=(e)=>{
                   type="email"
                   placeholder="Enter your booking id"
                 ></input>
-                <p className="berr"></p>
+                <p id="berr"></p>
               </span>
             </div>
             <div className="info-form__1col">
@@ -458,7 +505,7 @@ const custipchangehandler=(e)=>{
                   type="email"
                   placeholder="Enter your email address"
                 ></input>
-                <p className="mailerr"></p>
+                <p id="mailerr"></p>
               </span>
  
               <span>
@@ -473,7 +520,7 @@ const custipchangehandler=(e)=>{
                   type="text"
                   placeholder="Enter your street address"
                 ></input>
-                <p className="saerr"></p>
+                <p id="saerr"></p>
               </span>
             </div>
  
@@ -490,7 +537,7 @@ const custipchangehandler=(e)=>{
                   type="text"
                   placeholder="Enter your city"
                 ></input>
-                <p className="cerr"></p>
+                <p id="cerr"></p>
               </span>
  
               <span>
@@ -505,7 +552,7 @@ const custipchangehandler=(e)=>{
                   type="text"
                   placeholder="Enter your zip code"
                 ></input>
-                <p className="zerr"></p>
+                <p id="zerr"></p>
               </span>
             </div>
  
